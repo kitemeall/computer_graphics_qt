@@ -11,6 +11,7 @@ void GLWidget :: setType(int t)
 {
     type = t;
     paintGL();
+    updateGL();
 }
 
 void GLWidget::initializeGL()
@@ -108,7 +109,7 @@ void GLWidget::drawLineLoop(){
 }
 
 void GLWidget::drawPolygons(){
-    glColor3f(0,1,0);
+    glColor3f(0,0,1);
     glBegin(GL_POLYGON);
         glVertex3f(-0.5, -0.5, 0);
         glVertex3f(0.5, -0.5, 0);
@@ -120,7 +121,7 @@ void GLWidget::drawPolygons(){
 
 
 void GLWidget::drawTriangles(){
-    glColor3f(0,1,0);
+    glColor3f(0,0,1);
     glBegin(GL_TRIANGLES);
         glVertex3f(-0.5, -0.5, 0);
         glVertex3f(0.5, -0.5, 0);
@@ -134,7 +135,7 @@ void GLWidget::drawTriangles(){
 }
 
 void GLWidget::drawTriangleStrip(){
-    glColor3f(0,1,0);
+    glColor3f(0,0,1);
     glBegin(GL_TRIANGLE_STRIP);
         glVertex3f(-0.5, -0.5, 0);
         glVertex3f(0.5, -0.5, 0);
@@ -146,7 +147,7 @@ void GLWidget::drawTriangleStrip(){
 }
 
 void GLWidget::drawTriangleFan(){
-    glColor3f(0,1,0);
+    glColor3f(0,0,1);
     glBegin(GL_TRIANGLE_FAN);
         glVertex3f(0.0, 0.0, 0);
         glVertex3f(0.5, 0.0, 0);
@@ -164,7 +165,7 @@ void GLWidget::drawTriangleFan(){
 }
 
 void GLWidget::drawQuads(){
-    glColor3f(0,1,0);
+    glColor3f(0,0,1);
     glBegin(GL_QUADS);
         glVertex3f(0.4, 0.1, 0);
         glVertex3f(0.7, 0.2, 0);
