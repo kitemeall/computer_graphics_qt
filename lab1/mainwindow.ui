@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>580</width>
-    <height>360</height>
+    <width>603</width>
+    <height>462</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,30 +16,16 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="GLWidget" name="widget" native="true">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <zorder></zorder>
-     </widget>
-    </item>
-    <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
+       <widget class="GLWidget" name="widget" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
+       </widget>
       </item>
       <item>
        <widget class="QComboBox" name="comboBox">
@@ -65,16 +51,6 @@
         </item>
         <item>
          <property name="text">
-          <string>POLYGONS</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>NONCONVEX</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
           <string>TRIANGLES</string>
          </property>
         </item>
@@ -90,12 +66,17 @@
         </item>
         <item>
          <property name="text">
-          <string>QUADRILATERALS</string>
+          <string>QUADS</string>
          </property>
         </item>
         <item>
          <property name="text">
           <string>QUAD STRIP</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>POLYGONS</string>
          </property>
         </item>
        </widget>
