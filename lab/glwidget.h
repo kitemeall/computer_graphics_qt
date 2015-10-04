@@ -7,6 +7,14 @@ class GLWidget : public QGLWidget
     Q_OBJECT
 private:
     int type;
+
+    bool scissorEnabled;
+    int scissorX;
+    int scissorY;
+    int scissorW;
+    int scissorH;
+
+
 public:
     GLWidget(QWidget *parent = 0);
     void initializeGL();
@@ -16,9 +24,14 @@ public:
 public slots:
     void setType(int t);
 
+    void updateScissorParameters(int Sx, int Sy, int w, int h);
+    void updateScissorAccessibility(bool b);
 
 
 private:
+
+    void refreshScreen();
+    void drawFigures();
 
     void drawPoints();
     void drawLines();

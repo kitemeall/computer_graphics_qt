@@ -6,17 +6,33 @@ GLWidget::GLWidget(QWidget *parent)
     : QGLWidget(parent)
 {
     type = 0;
+
+    scissorEnabled = false;
+    scissorX = 0;
+    scissorY = 0;
+    scissorW = 0;
+    scissorH = 0;
+
+
+
 }
+
+void GLWidget::refreshScreen(){
+    paintGL();
+    updateGL();
+}
+
 void GLWidget :: setType(int t)
 {
     type = t;
-    paintGL();
-    updateGL();
+    refreshScreen();
+
 }
 
 void GLWidget::initializeGL()
 {
 
+    glEnable(GL_BLEND);
     glClearColor(1.0, 1.0, 0.0, 1.0);
     glLineWidth(5);
     glPointSize(5);
@@ -27,8 +43,28 @@ void GLWidget::initializeGL()
 void GLWidget::paintGL()
 {
 
+    glScissor(scissorX, scissorY,
+              scissorW, scissorH);
+    drawFigures();
+
+   /* glEnable(GL_BLEND);
+
+
+      glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+
+
+      drawQuads();
+ drawTriangles();
+ */
+
+}
+
+void GLWidget::drawFigures(){
     glClearColor(1.0, 1.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
     switch (type)
     {
         case 0:  drawPoints() ;
@@ -53,13 +89,12 @@ void GLWidget::paintGL()
                  break;
         default: break;
     }
-
-
 }
 
 void GLWidget::resizeGL(int width, int height)
 {
     glViewport(0, 0,width, height);
+
 }
 
 
@@ -121,7 +156,7 @@ void GLWidget::drawPolygons(){
 
 
 void GLWidget::drawTriangles(){
-    glColor3f(0,0,1);
+    glColor4f(0,0,1, 0.5);
     glBegin(GL_TRIANGLES);
         glVertex3f(-0.5, -0.5, 0);
         glVertex3f(0.5, -0.5, 0);
@@ -147,7 +182,7 @@ void GLWidget::drawTriangleStrip(){
 }
 
 void GLWidget::drawTriangleFan(){
-    glColor3f(0,0,1);
+    glColor4f(0,0,1, 0.5);
     glBegin(GL_TRIANGLE_FAN);
         glVertex3f(0.0, 0.0, 0);
         glVertex3f(0.5, 0.0, 0);
@@ -165,7 +200,7 @@ void GLWidget::drawTriangleFan(){
 }
 
 void GLWidget::drawQuads(){
-    glColor3f(0,0,1);
+    glColor4f(0.8,0,0.8, 0.4);
     glBegin(GL_QUADS);
         glVertex3f(0.4, 0.1, 0);
         glVertex3f(0.7, 0.2, 0);
@@ -201,7 +236,25 @@ void GLWidget::drawQuadStrip(){
 
 }
 
+//scrissor section
+void GLWidget::updateScissorParameters(int Sx, int Sy, int w, int h)
+{
+    scissorX = Sx;
+    scissorY = Sy;
+    scissorW = w;
+    scissorH = h;
+}
 
+void GLWidget::updateScissorAccessibility(bool b){
+    scissorEnabled = b;
+
+    if(scissorEnabled)
+        glEnable(GL_SCISSOR_TEST);
+    else
+        glDisable(GL_SCISSOR_TEST);
+}
+
+//scrissor section
 
 
 
