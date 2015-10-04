@@ -8,11 +8,14 @@ GLWidget::GLWidget(QWidget *parent)
     type = 0;
 
     scissorEnabled = false;
-    scissorX = 0;
-    scissorY = 0;
-    scissorW = 0;
-    scissorH = 0;
+    scissorX = 100;
+    scissorY = 100;
+    scissorW = 200;
+    scissorH = 200;
 
+    alphaTestEnabled = false;
+    alphaFunc = GL_NEVER;
+    alphaValue = 1.0;
 
 
 }
@@ -33,7 +36,7 @@ void GLWidget::initializeGL()
 {
 
     glEnable(GL_BLEND);
-    glClearColor(1.0, 1.0, 0.0, 1.0);
+    glClearColor(1.0, 1.0, 1.0, 1.0);
     glLineWidth(5);
     glPointSize(5);
 
@@ -43,27 +46,37 @@ void GLWidget::initializeGL()
 void GLWidget::paintGL()
 {
 
+    if(alphaTestEnabled)
+    {
+        glEnable(GL_ALPHA_TEST);
+    }
+    glAlphaFunc(alphaFunc, alphaValue);
+
+    if(scissorEnabled)
+    {
+        clearScreen();
+        glEnable(GL_SCISSOR_TEST);
+    }
     glScissor(scissorX, scissorY,
               scissorW, scissorH);
+
+
     drawFigures();
 
-   /* glEnable(GL_BLEND);
+
+        glDisable(GL_SCISSOR_TEST);
+        glDisable(GL_ALPHA_TEST);
 
 
-      glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-
-
-      drawQuads();
- drawTriangles();
- */
 
 }
 
-void GLWidget::drawFigures(){
-    glClearColor(1.0, 1.0, 0.0, 1.0);
+void GLWidget::clearScreen(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
 
+void GLWidget::drawFigures(){
+    clearScreen();
 
     switch (type)
     {
@@ -243,18 +256,57 @@ void GLWidget::updateScissorParameters(int Sx, int Sy, int w, int h)
     scissorY = Sy;
     scissorW = w;
     scissorH = h;
+    updateGL();
+
 }
 
 void GLWidget::updateScissorAccessibility(bool b){
     scissorEnabled = b;
+    updateGL();
 
-    if(scissorEnabled)
-        glEnable(GL_SCISSOR_TEST);
-    else
-        glDisable(GL_SCISSOR_TEST);
 }
 
 //scrissor section
+
+
+//alpha section
+
+void GLWidget::updateAlphaAccessibility(bool b){
+    alphaTestEnabled = b;
+    updateGL();
+}
+
+void GLWidget::updateAlphaFunc(int val){
+    switch (val) {
+    case 0: alphaFunc = GL_NEVER;
+            break;
+    case 1: alphaFunc = GL_LESS;
+            break;
+    case 2: alphaFunc = GL_EQUAL;
+            break;
+    case 3: alphaFunc = GL_LEQUAL;
+            break;
+    case 4: alphaFunc = GL_GREATER;
+            break;
+    case 5: alphaFunc = GL_NOTEQUAL;
+            break;
+    case 6: alphaFunc = GL_GEQUAL;
+            break;
+    case 7: alphaFunc = GL_ALWAYS;
+            break;
+    default:
+        break;
+    }
+    updateGL();
+}
+
+void GLWidget::updateAlphaValue(double val)
+{
+    alphaValue = val;
+    updateGL();
+}
+
+//alpha section
 
 
 

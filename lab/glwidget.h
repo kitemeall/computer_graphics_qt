@@ -14,6 +14,10 @@ private:
     int scissorW;
     int scissorH;
 
+    int alphaTestEnabled;
+    GLenum alphaFunc;
+    GLclampf alphaValue;
+
 
 public:
     GLWidget(QWidget *parent = 0);
@@ -27,11 +31,16 @@ public slots:
     void updateScissorParameters(int Sx, int Sy, int w, int h);
     void updateScissorAccessibility(bool b);
 
+    void updateAlphaFunc(int val);
+    void updateAlphaAccessibility(bool b);
+    void updateAlphaValue(double val);
 
 private:
 
+    void clearScreen();
     void refreshScreen();
     void drawFigures();
+
 
     void drawPoints();
     void drawLines();
