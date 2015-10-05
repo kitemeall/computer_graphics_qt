@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->alpha_check, SIGNAL(clicked(bool)),glWidget, SLOT(updateAlphaAccessibility(bool)));
     connect(ui->alpha_combo, SIGNAL(activated(int)), glWidget, SLOT(updateAlphaFunc(int)));
     connect(ui->alpha_spin, SIGNAL(valueChanged(double)), glWidget, SLOT(updateAlphaValue(double)));
-
+    connect(ui->blend_check, SIGNAL(clicked(bool)), glWidget, SLOT(updateBlendAccessibility(bool)));
 }
 
 MainWindow::~MainWindow()
@@ -57,4 +57,20 @@ void MainWindow::on_spinBox_4_valueChanged(int arg1)
     int w = ui->spinBox_3->value();
     int h = ui->spinBox_4->value();
     glWidget->updateScissorParameters(sx, sy, w, h);
+}
+
+void MainWindow::on_blend_sfactorCombo_activated(int index)
+{
+    int sf = ui->blend_sfactorCombo->currentIndex();
+    int df = ui->blend_dfactorCombo->currentIndex();
+    glWidget->updateBlendParameters(sf,df);
+
+}
+
+
+void MainWindow::on_blend_dfactorCombo_activated(int index)
+{
+    int sf = ui->blend_sfactorCombo->currentIndex();
+    int df = ui->blend_dfactorCombo->currentIndex();
+    glWidget->updateBlendParameters(sf,df);
 }

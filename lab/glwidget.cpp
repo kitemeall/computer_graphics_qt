@@ -17,6 +17,10 @@ GLWidget::GLWidget(QWidget *parent)
     alphaFunc = GL_NEVER;
     alphaValue = 1.0;
 
+    blendTestEnabled = false;
+    sfactor = GL_ZERO;
+    dfactor = GL_ZERO;
+
 
 }
 
@@ -35,8 +39,8 @@ void GLWidget :: setType(int t)
 void GLWidget::initializeGL()
 {
 
-    glEnable(GL_BLEND);
-    glClearColor(1.0, 1.0, 1.0, 1.0);
+   // glEnable(GL_BLEND);
+    glClearColor(1.0, 1.0, 0.0, 1.0);
     glLineWidth(5);
     glPointSize(5);
 
@@ -45,11 +49,13 @@ void GLWidget::initializeGL()
 
 void GLWidget::paintGL()
 {
+    if(blendTestEnabled)
+        glEnable(GL_BLEND);
+    glBlendFunc(sfactor, dfactor);
+
 
     if(alphaTestEnabled)
-    {
         glEnable(GL_ALPHA_TEST);
-    }
     glAlphaFunc(alphaFunc, alphaValue);
 
     if(scissorEnabled)
@@ -66,6 +72,7 @@ void GLWidget::paintGL()
 
         glDisable(GL_SCISSOR_TEST);
         glDisable(GL_ALPHA_TEST);
+        glDisable(GL_BLEND);
 
 
 
@@ -112,7 +119,7 @@ void GLWidget::resizeGL(int width, int height)
 
 
 void GLWidget::drawPoints(){
-    glColor3f(1,0,0);
+    glColor4f(1,0,0, 1.0);
     glBegin(GL_POINTS);
         glVertex3f(0, 0, 0);
         glVertex3f(1, 1, 0);
@@ -126,7 +133,7 @@ void GLWidget::drawPoints(){
 }
 
 void GLWidget::drawLines(){
-    glColor3f(0,1,0);
+    glColor4f(0,1,0, 0.9);
     glBegin(GL_LINES);
         glVertex3f(0, 0, 0);
         glVertex3f(1, 1, 0);
@@ -137,7 +144,7 @@ void GLWidget::drawLines(){
 }
 
 void GLWidget::drawLineStrip(){
-    glColor3f(0,1,0);
+    glColor4f(0,1,0,0.8);
     glBegin(GL_LINE_STRIP);
         glVertex3f(0, 0, 0);
         glVertex3f(0.9, 0.9, 0);
@@ -147,7 +154,7 @@ void GLWidget::drawLineStrip(){
 }
 
 void GLWidget::drawLineLoop(){
-    glColor3f(0,1,0);
+    glColor4f(0,1,0, 0.7);
     glBegin(GL_LINE_LOOP);
         glVertex3f(0, 0, 0);
         glVertex3f(0.9, 0.9, 0);
@@ -157,7 +164,7 @@ void GLWidget::drawLineLoop(){
 }
 
 void GLWidget::drawPolygons(){
-    glColor3f(0,0,1);
+    glColor4f(0,0,1, 1.0);
     glBegin(GL_POLYGON);
         glVertex3f(-0.5, -0.5, 0);
         glVertex3f(0.5, -0.5, 0);
@@ -169,7 +176,7 @@ void GLWidget::drawPolygons(){
 
 
 void GLWidget::drawTriangles(){
-    glColor4f(0,0,1, 0.5);
+    glColor4f(0,0,1, 0.6);
     glBegin(GL_TRIANGLES);
         glVertex3f(-0.5, -0.5, 0);
         glVertex3f(0.5, -0.5, 0);
@@ -183,7 +190,7 @@ void GLWidget::drawTriangles(){
 }
 
 void GLWidget::drawTriangleStrip(){
-    glColor3f(0,0,1);
+    glColor4f(0,0,1, 0.5);
     glBegin(GL_TRIANGLE_STRIP);
         glVertex3f(-0.5, -0.5, 0);
         glVertex3f(0.5, -0.5, 0);
@@ -195,7 +202,7 @@ void GLWidget::drawTriangleStrip(){
 }
 
 void GLWidget::drawTriangleFan(){
-    glColor4f(0,0,1, 0.5);
+    glColor4f(0,0,1, 0.4);
     glBegin(GL_TRIANGLE_FAN);
         glVertex3f(0.0, 0.0, 0);
         glVertex3f(0.5, 0.0, 0);
@@ -213,7 +220,7 @@ void GLWidget::drawTriangleFan(){
 }
 
 void GLWidget::drawQuads(){
-    glColor4f(0.8,0,0.8, 0.4);
+    glColor4f(0.8,0,0.8, 0.3);
     glBegin(GL_QUADS);
         glVertex3f(0.4, 0.1, 0);
         glVertex3f(0.7, 0.2, 0);
@@ -231,7 +238,7 @@ void GLWidget::drawQuads(){
 
 void GLWidget::drawQuadStrip(){
 
-    glColor3f(0,1,0);
+    glColor4f(0,1,0,0.2);
     glBegin(GL_QUAD_STRIP);
         glVertex3f(0.7, 0.2, 0);
         glVertex3f(0.7, 0.6, 0);
@@ -310,4 +317,57 @@ void GLWidget::updateAlphaValue(double val)
 
 
 
+//blend section
+void GLWidget::updateBlendAccessibility(bool b){
+    blendTestEnabled = b;
+    updateGL();
+}
 
+void GLWidget::updateBlendParameters(int sf, int df){
+    switch(sf){
+    case 0: sfactor = GL_ZERO;
+            break;
+    case 1: sfactor = GL_ONE;
+            break;
+    case 2: sfactor = GL_DST_COLOR;
+            break;
+    case 3: sfactor = GL_ONE_MINUS_DST_COLOR;
+            break;
+    case 4: sfactor = GL_SRC_ALPHA;
+            break;
+    case 5: sfactor = GL_ONE_MINUS_SRC_ALPHA;
+            break;
+    case 6: sfactor = GL_DST_ALPHA;
+            break;
+    case 7: sfactor = GL_ONE_MINUS_DST_ALPHA;
+            break;
+    case 8: sfactor = GL_SRC_ALPHA_SATURATE;
+            break;
+    default:
+        break;
+    }
+
+    switch(df){
+    case 0: dfactor = GL_ZERO;
+            break;
+    case 1: dfactor = GL_ONE;
+            break;
+    case 2: dfactor = GL_SRC_COLOR;
+            break;
+    case 3: dfactor = GL_ONE_MINUS_SRC_COLOR;
+            break;
+    case 4: dfactor = GL_SRC_ALPHA;
+            break;
+    case 5: dfactor = GL_ONE_MINUS_SRC_ALPHA;
+            break;
+    case 6: dfactor = GL_DST_ALPHA;
+            break;
+    case 7: dfactor = GL_ONE_MINUS_DST_ALPHA;
+            break;
+    default:
+        break;
+    }
+    updateGL();
+}
+
+//blend section

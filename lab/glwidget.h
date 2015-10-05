@@ -14,9 +14,13 @@ private:
     int scissorW;
     int scissorH;
 
-    int alphaTestEnabled;
+    bool alphaTestEnabled;
     GLenum alphaFunc;
     GLclampf alphaValue;
+
+    bool blendTestEnabled;
+    GLenum sfactor;
+    GLenum dfactor;
 
 
 public:
@@ -34,6 +38,9 @@ public slots:
     void updateAlphaFunc(int val);
     void updateAlphaAccessibility(bool b);
     void updateAlphaValue(double val);
+
+    void updateBlendAccessibility(bool b);
+    void updateBlendParameters(int sf, int df);
 
 private:
 

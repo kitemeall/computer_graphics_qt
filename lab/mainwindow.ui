@@ -34,52 +34,52 @@
        <widget class="QComboBox" name="comboBox">
         <item>
          <property name="text">
-          <string>POINTS</string>
+          <string>POINTS A1.0</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>LINES</string>
+          <string>LINES A0.9</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>LINE STRIP</string>
+          <string>LINE STRIP A0.8</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>LINE LOOP</string>
+          <string>LINE LOOP A0.7</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>TRIANGLES</string>
+          <string>TRIANGLES A0.6</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>TRIANGLE STRIP</string>
+          <string>TRIANGLE STRIP A0.5</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>TRIANGLE FAN</string>
+          <string>TRIANGLE FAN A0.4</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>QUADS</string>
+          <string>QUADS  A0.3</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>QUAD STRIP</string>
+          <string>QUAD STRIP A0.2</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>POLYGONS</string>
+          <string>POLYGONS A1.0</string>
          </property>
         </item>
        </widget>
@@ -237,10 +237,117 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <widget class="QCheckBox" name="checkBox_3">
+           <widget class="QCheckBox" name="blend_check">
             <property name="text">
              <string>BLEND_TEST</string>
             </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>sfactor</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="blend_sfactorCombo">
+            <item>
+             <property name="text">
+              <string>GL_ZERO</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>GL_ONE,</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>GL_DST_COLOR,</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>GL_ONE_MINUS_DST_COLOR,</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>GL_SRC_ALPHA,</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>GL_ONE_MINUS_SRC_ALPHA,</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>GL_DST_ALPHA,</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>GL_ONE_MINUS_DST_ALPHA</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>GL_SRC_ALPHA_SATURATE.</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_9">
+            <property name="text">
+             <string>dfactor</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="blend_dfactorCombo">
+            <item>
+             <property name="text">
+              <string>GL_ZERO,</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>GL_ONE,</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>GL_SRC_COLOR,</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>GL_ONE_MINUS_SRC_COLOR,</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>GL_SRC_ALPHA,</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>GL_ONE_MINUS_SRC_ALPHA,</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>GL_DST_ALPHA</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>GL_ONE_MINUS_DST_ALPHA.</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>
