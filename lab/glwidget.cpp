@@ -172,6 +172,24 @@ void GLWidget::drawPolygons(){
         glVertex3f(0.0, 0.1, 0);
         glVertex3f(-0.5, 0.5, 0);
     glEnd();
+
+    glColor4f(0.8,0.3,0.5, 0.4);
+    glBegin(GL_POLYGON);
+        glVertex3f(-0.4, -0.5, 0);
+        glVertex3f(0.3, -0.1, 0);
+        glVertex3f(0.5, 0.7, 0);
+        glVertex3f(0.0, 0.1, 0);
+        glVertex3f(-0.3, 0.5, 0);
+    glEnd();
+
+    glColor4f(0.4,0.7,0.1, 0.4);
+    glBegin(GL_POLYGON);
+        glVertex3f(-0.4, -0.3, 0);
+        glVertex3f(0.3, -0.1, 0);
+        glVertex3f(0.8, 0.2, 0);
+        glVertex3f(0.7, 0.3, 0);
+        glVertex3f(-0.1, 0.5, 0);
+    glEnd();
 }
 
 
