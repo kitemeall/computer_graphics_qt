@@ -5,7 +5,7 @@
 GLWidget::GLWidget(QWidget *parent)
     : QGLWidget(parent)
 {
-    type = 0;
+    type = 4;
 
     scissorEnabled = false;
     scissorX = 100;
@@ -176,15 +176,16 @@ void GLWidget::drawPolygons(){
 
 
 void GLWidget::drawTriangles(){
-    glColor4f(0,0,1, 0.6);
+    glColor4f(0,0,1, 1);
     glBegin(GL_TRIANGLES);
         glVertex3f(-0.5, -0.5, 0);
         glVertex3f(0.5, -0.5, 0);
         glVertex3f(0.5, 0.5, 0);
 
-        glVertex3f(-0.5, 0.25, 0);
-        glVertex3f(0.0, 0.25, 0);
-        glVertex3f(0.0, 0.75, 0);
+        glColor4f(0.7,0.2,0.5, 0.6);
+        glVertex3f(-0.3, 0.3, 0);
+        glVertex3f(0.0, 0.3, 0);
+        glVertex3f(0.0, -0.6, 0);
 
     glEnd();
 }
