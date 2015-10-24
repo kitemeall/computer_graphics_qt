@@ -8,7 +8,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
     glWidget = ui->widget;
-    connect(ui->comboBox, SIGNAL(activated(int)), glWidget, SLOT(setType(int)));
 }
 
 MainWindow::~MainWindow()

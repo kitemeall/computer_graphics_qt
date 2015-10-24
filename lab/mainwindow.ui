@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>603</width>
-    <height>462</height>
+    <width>600</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,60 +25,6 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QComboBox" name="comboBox">
-        <item>
-         <property name="text">
-          <string>POINTS</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>LINES</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>LINE STRIP</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>LINE LOOP</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>TRIANGLES</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>TRIANGLE STRIP</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>TRIANGLE FAN</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>QUADS</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>QUAD STRIP</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>POLYGONS</string>
-         </property>
-        </item>
        </widget>
       </item>
      </layout>

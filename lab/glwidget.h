@@ -1,6 +1,7 @@
 #ifndef GLWIDGET_H
 #define GLWIDGET_H
 #include <QGLWidget>
+#include"point.h"
 
 class GLWidget : public QGLWidget
 {
@@ -14,23 +15,12 @@ public:
     void resizeGL(int width, int height);
 
 public slots:
-    void setType(int t);
 
 
 
 private:
+    void iteration(double len, double angle, Point p, int iter);
 
-    void drawPoints();
-    void drawLines();
-    void drawLineStrip();
-    void drawLineLoop();
-    void drawPolygons();
-    void drawNonconvex();
-    void drawTriangles();
-    void drawTriangleStrip();
-    void drawTriangleFan();
-    void drawQuads();
-    void drawQuadStrip();
 };
 
 #endif // GLWIDGET_H
