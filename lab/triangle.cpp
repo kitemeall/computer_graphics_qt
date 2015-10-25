@@ -2,9 +2,9 @@
 #include<GL/gl.h>
 
 Triangle::Triangle(double l){
-    a = Point(-0.5 * l, 0);
-    b = Point(0, 0.866 * l);
-    c = Point(0.5 * l, 0);
+    a = Point(-0.4 * l, 0);
+    b = Point(0, 1 * l);
+    c = Point(0.4 * l, 0);
 }
 void Triangle::rotate(double alpha){
     a.rotate(alpha);
