@@ -27,7 +27,7 @@ void GLWidget::paintGL()
     glColor3f(0,0,1);
 
 
-   iteration(0.5, 0, Point(0,0.5), 5);
+   iteration(0.5, 0.0, Point(0.0,0.5), 2);
 
 
 
@@ -45,16 +45,33 @@ void GLWidget::resizeGL(int width, int height)
 void GLWidget::iteration(double len, double angle, Point p, int iter){
     Triangle tr(len, angle, p);
     tr.drawTriange();
-    Line ln(p, angle-M_PI/2, len/3);
+    Line lne(p,0, 0);
     for(int i = 0; i < iter; i++){
+        Line ln(Point(lne.getEndX(), lne.getEndY()),
+                angle-M_PI/2, len/3.0);
         ln.drawLine();
-        iteration(len/2, angle - M_PI/3,
-                  Point(ln.getEndX() + len*i/6 * sin(angle + M_PI/3),
-                        ln.getEndY() - len*i/6 * cos(angle + M_PI/3)),
+
+        iteration(len/2.0, angle + M_PI/3.0,
+                  Point(ln.getStartX() - len*i/6.0 * sin(abs(angle) + M_PI/3.0),
+                        ln.getStartY() + len*i/6.0 * cos(abs(angle) + M_PI/3.0)),
                   i);
 
-        ln = Line(p, angle-M_PI/2, len/3 * (i+2));
+        iteration(len/2.0, angle - M_PI/3.0,
+                  Point(ln.getEndX() + len*i/6.0 * sin(abs(angle) + M_PI/3.0),
+                        ln.getEndY() + len*i/6.0 * cos(abs(angle) + M_PI/3.0)),
+                  i);
+
+
+
+
+
+        lne = ln;
+
+
+
     }
+
+
 
 
 }

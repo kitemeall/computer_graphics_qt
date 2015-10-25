@@ -35,3 +35,10 @@ double Line::getEndX(){
 double Line::getEndY(){
     return start.getY()+vect.getY();
 }
+
+double Line::getStartX(){
+    return start.getX();
+}
+double Line::getStartY(){
+    return start.getY();
+}

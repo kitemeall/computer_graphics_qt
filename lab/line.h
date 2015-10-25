@@ -12,6 +12,8 @@ public:
     void extendX2();
     double getEndX();
     double getEndY();
+    double getStartX();
+    double getStartY();
      Point start;
 private:
     Point vect;
