@@ -1,5 +1,6 @@
 #include "triangle.h"
 #include<GL/gl.h>
+#include <math.h>
 
 Triangle::Triangle(double l){
     a = Point(-0.4 * l, 0);
@@ -22,7 +23,7 @@ Triangle::Triangle(double l, float alpha, Point p)
     a = Point(-0.5 * l, 0);
     b = Point(0, l);
     c = Point(0.5 * l, 0);
-    rotate(alpha);
+    rotate( alpha - M_PI/2);
     move(p);
 
 }

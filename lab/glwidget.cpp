@@ -27,7 +27,7 @@ void GLWidget::paintGL()
     glColor3f(0,0,1);
 
 
-   iteration(0.5, 0.0, Point(0.0,0.5), 2);
+   iteration(0.5, M_PI/2, Point(0.0,0.5), 7);
 
 
 
@@ -64,22 +64,26 @@ void GLWidget::iteration(double len, double angle, Point p, int iter){
     Line lne(p,0, 0);
     for(int i = 0; i < iter; i++){
         Line ln(Point(lne.getEndX(), lne.getEndY()),
-                angle-M_PI/2, len/6.0);
+                angle-M_PI, len/6.0);
         ln.drawLine();
 
-        iteration(len/2.0, angle + M_PI/3.0,
-                  Point(ln.getStartX() - len*i/6.0 * sin(abs(angle) + M_PI/3.0),
-                        ln.getStartY() + len*i/6.0 * cos(abs(angle) + M_PI/3.0)),
+        double newAngle = angle + M_PI/3.0;
+
+         iteration(len/2.0, angle + M_PI/3.0,
+                  Point(ln.getStartX() + len*i/6.0 * cos(newAngle),
+                        ln.getStartY() + len*i/6.0 * sin(newAngle)),
                   i);
+
 
         Line ln2(Point(ln.getEndX(), ln.getEndY()),
-                angle-M_PI/2, len/6.0);
+                angle-M_PI, len/6.0);
         ln2.drawLine();
 
-        iteration(len/2.0, angle - M_PI/3.0,
-                  Point(ln2.getStartX() + len*i/6.0 * sin(abs(angle) + M_PI/3.0),
-                        ln2.getStartY() + len*i/6.0 * cos(abs(angle) + M_PI/3.0)),
-                  i);
+         newAngle = angle - M_PI/3.0;
+            iteration(len/2.0, newAngle,
+                      Point(ln2.getStartX() + len*i/6.0 * cos(newAngle),
+                            ln2.getStartY() + len*i/6.0 * sin(newAngle)),
+                    i);
 
 
 
