@@ -27,11 +27,7 @@ void GLWidget::paintGL()
     glColor3f(0,0,1);
 
 
-   iteration(0.5, M_PI/2, Point(0.0,0.5), 7);
-
-
-
-
+   iteration(0.5, M_PI/2, Point(0.0,0.5), 8);
 
 
 }
