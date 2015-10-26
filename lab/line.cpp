@@ -17,9 +17,7 @@ Line::Line(Point start, double alpha, double len){
     this->vect = Point(len * cos(alpha), len * sin(alpha));
 }
 
-void Line::extendX2(){
-    this->vect.add(this->vect);
-}
+
 
 void Line::drawLine(){
     glBegin(GL_LINES);

@@ -9,7 +9,6 @@ public:
     Line(Point start, Point vect);
     Line(Point start, double alpha, double len);
     void drawLine();
-    void extendX2();
     double getEndX();
     double getEndY();
     double getStartX();

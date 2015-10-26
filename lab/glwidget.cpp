@@ -15,7 +15,7 @@ void GLWidget::initializeGL()
 
     glClearColor(1.0, 1.0, 0.0, 1.0);
     glLineWidth(1);
-
+     glViewport(0, 0,578, 578);
 
 }
 
@@ -38,7 +38,7 @@ void GLWidget::paintGL()
 
 void GLWidget::resizeGL(int width, int height)
 {
-    glViewport(0, 0,width, height);
+    glViewport(0, ,width, height);
 }
 
 
@@ -54,8 +54,8 @@ void GLWidget::iteration(double len, double angle, Point p, int iter){
         ln.drawLine();
 
         iteration(len/2.0, angle + M_PI/3.0,
-                  Point(ln.getStartX() - len*i/6.0 * sin((angle) + M_PI/3.0),
-                        ln.getStartY() + len*i/6.0 * cos((angle) + M_PI/3.0)),
+                  Point(ln.getStartX() - len*i/6.0 * sin(abs(angle) + M_PI/3.0),
+                        ln.getStartY() + len*i/6.0 * cos(abs(angle) + M_PI/3.0)),
                   i);
 
         Line ln2(Point(ln.getEndX(), ln.getEndY()),
@@ -63,8 +63,8 @@ void GLWidget::iteration(double len, double angle, Point p, int iter){
         ln2.drawLine();
 
         iteration(len/2.0, angle - M_PI/3.0,
-                  Point(ln2.getStartX() + len*i/6.0 * sin((angle) + M_PI/3.0),
-                        ln2.getStartY() + len*i/6.0 * cos((angle) + M_PI/3.0)),
+                  Point(ln2.getStartX() + len*i/6.0 * sin(abs(angle) + M_PI/3.0),
+                        ln2.getStartY() + len*i/6.0 * cos(abs(angle) + M_PI/3.0)),
                   i);
 
 
