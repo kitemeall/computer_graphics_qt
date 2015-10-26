@@ -27,7 +27,7 @@ void GLWidget::paintGL()
     glColor3f(0,0,1);
 
 
-   iteration(0.5, 0.0, Point(0.0,0.5), 5);
+   iteration(0.5, 0.0, Point(0.0,0.5), 2);
 
 
 
@@ -38,7 +38,21 @@ void GLWidget::paintGL()
 
 void GLWidget::resizeGL(int width, int height)
 {
-    glViewport(0, ,width, height);
+    GLfloat aspectRatio = (GLfloat)width / (GLfloat)height;
+
+
+    glMatrixMode(GL_PROJECTION);
+
+    glLoadIdentity();
+
+    glViewport(0,0,width, height);
+
+
+    if(width < height)
+        glOrtho(-1.0, 1.0, -1.0/aspectRatio, 1.0/aspectRatio, 1.0, -1.0 );
+    else
+        glOrtho(-1.0 * aspectRatio, 1.0 * aspectRatio, -1.0, 1.0, 1.0, -1.0);
+
 }
 
 
