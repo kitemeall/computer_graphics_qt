@@ -1,5 +1,9 @@
 #include <QGLWidget>
 #include "glwidget.h"
+#include <math.h>
+#include <qdebug.h>
+float Xt(float x0, float x1, float x2, float x3, float t);
+int factorial(int n);
 
 
 GLWidget::GLWidget(QWidget *parent)
@@ -7,12 +11,7 @@ GLWidget::GLWidget(QWidget *parent)
 {
     type = 0;
 }
-void GLWidget :: setType(int t)
-{
-    type = t;
-    paintGL();
-    updateGL();
-}
+
 
 void GLWidget::initializeGL()
 {
@@ -21,39 +20,27 @@ void GLWidget::initializeGL()
     glLineWidth(5);
     glPointSize(5);
 
+    float x0 = 1; float y0 = 1;
+    float x1 = 2; float y1 = 3;
+    float x2 = 4; float y2 = 3;
+    float x3 = 3; float y3 = 1;
+
+
+
 
 }
 
 void GLWidget::paintGL()
 {
 
+
     glClearColor(1.0, 1.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    switch (type)
-    {
-        case 0:  drawPoints() ;
-                 break;
-        case 1:  drawLines();
-                 break;
-        case 2:  drawLineStrip();
-                 break;
-        case 3:  drawLineLoop();
-                 break;
-        case 4:  drawTriangles();
-                 break;
-        case 5:  drawTriangleStrip();
-                 break;
-        case 6:  drawTriangleFan();
-                 break;
-        case 7:  drawQuads();
-                 break;
-        case 8:  drawQuadStrip();
-                 break;
-        case 9:  drawPolygons();
-                 break;
-        default: break;
-    }
 
+    glColor3f(1, 0.0, 0.0);
+    glBegin(GL_POINTS);
+        glVertex2d(0.3, 0.3);
+    glEnd();
 
 }
 
@@ -61,145 +48,27 @@ void GLWidget::resizeGL(int width, int height)
 {
     glViewport(0, 0,width, height);
 }
+float J(int n, int i, float t){
 
-
-void GLWidget::drawPoints(){
-    glColor3f(1,0,0);
-    glBegin(GL_POINTS);
-        glVertex3f(0, 0, 0);
-        glVertex3f(1, 1, 0);
-        glVertex3f(0.3, 0.2, 0);
-        glVertex3f(0.2, 0.2, 0);
-        glVertex3f(-0.7, 0.2, 0);
-        glVertex3f(-0.1, 0.4, 0);
-    glEnd();
-
-
+   int C = factorial(n) / (factorial(i) * factorial(n - i));
+   return C * pow(t, i) * pow(1 - t , n - i);
 }
 
-void GLWidget::drawLines(){
-    glColor3f(0,1,0);
-    glBegin(GL_LINES);
-        glVertex3f(0, 0, 0);
-        glVertex3f(1, 1, 0);
-        glVertex3f(-0.7, 0.2, 0);
-        glVertex3f(-0.1, 0.4, 0);
-    glEnd();
-
+int factorial(int n)
+{
+  return (n == 1 || n == 0) ? 1 : factorial(n - 1) * n;
 }
 
-void GLWidget::drawLineStrip(){
-    glColor3f(0,1,0);
-    glBegin(GL_LINE_STRIP);
-        glVertex3f(0, 0, 0);
-        glVertex3f(0.9, 0.9, 0);
-        glVertex3f(-0.7, 0.2, 0);
-        glVertex3f(-0.1, 0.4, 0);
-    glEnd();
-}
+float Xt(float x0, float x1, float x2, float x3, float t){
 
-void GLWidget::drawLineLoop(){
-    glColor3f(0,1,0);
-    glBegin(GL_LINE_LOOP);
-        glVertex3f(0, 0, 0);
-        glVertex3f(0.9, 0.9, 0);
-        glVertex3f(-0.7, 0.2, 0);
-        glVertex3f(-0.1, 0.4, 0);
-    glEnd();
-}
-
-void GLWidget::drawPolygons(){
-    glColor3f(0,0,1);
-    glBegin(GL_POLYGON);
-        glVertex3f(-0.5, -0.5, 0);
-        glVertex3f(0.5, -0.5, 0);
-        glVertex3f(0.5, 0.5, 0);
-        glVertex3f(0.0, 0.1, 0);
-        glVertex3f(-0.5, 0.5, 0);
-    glEnd();
+    float ans = x0 * J(3, 0, t)
+            + x1 * J(3, 1, t)
+            + x2 * J(3, 2, t)
+            + x3 * J(3, 3, t);
+    return ans;
 }
 
 
-void GLWidget::drawTriangles(){
-    glColor3f(0,0,1);
-    glBegin(GL_TRIANGLES);
-        glVertex3f(-0.5, -0.5, 0);
-        glVertex3f(0.5, -0.5, 0);
-        glVertex3f(0.5, 0.5, 0);
-
-        glVertex3f(-0.5, 0.25, 0);
-        glVertex3f(0.0, 0.25, 0);
-        glVertex3f(0.0, 0.75, 0);
-
-    glEnd();
-}
-
-void GLWidget::drawTriangleStrip(){
-    glColor3f(0,0,1);
-    glBegin(GL_TRIANGLE_STRIP);
-        glVertex3f(-0.5, -0.5, 0);
-        glVertex3f(0.5, -0.5, 0);
-        glVertex3f(0.5, 0.5, 0);
-
-        glVertex3f(1.0, 0.0, 0);
-
-    glEnd();
-}
-
-void GLWidget::drawTriangleFan(){
-    glColor3f(0,0,1);
-    glBegin(GL_TRIANGLE_FAN);
-        glVertex3f(0.0, 0.0, 0);
-        glVertex3f(0.5, 0.0, 0);
-        glVertex3f(0.5, 0.5, 0);
-
-        glVertex3f(0.3, 0.6, 0);
-
-        glVertex3f(0.2, 0.7, 0);
-
-        glVertex3f(0.0, 0.8, 0);
-
-        glVertex3f(-0.3, 0.6, 0);
-
-    glEnd();
-}
-
-void GLWidget::drawQuads(){
-    glColor3f(0,0,1);
-    glBegin(GL_QUADS);
-        glVertex3f(0.4, 0.1, 0);
-        glVertex3f(0.7, 0.2, 0);
-        glVertex3f(0.7, 0.6, 0);
-        glVertex3f(0.4, 0.7, 0);
-
-        glVertex3f(0.1, 0.9, 0);
-        glVertex3f(-0.1, 0.6, 0);
-        glVertex3f(-0.1, 0.3, 0);
-        glVertex3f(0.1, -0.1, 0);
-
-
-    glEnd();
-}
-
-void GLWidget::drawQuadStrip(){
-
-    glColor3f(0,1,0);
-    glBegin(GL_QUAD_STRIP);
-        glVertex3f(0.7, 0.2, 0);
-        glVertex3f(0.7, 0.6, 0);
-        glVertex3f(0.4, 0.1, 0);
-        glVertex3f(0.4, 0.7, 0);
-
-        glVertex3f(0.1, -0.1, 0);
-        glVertex3f(0.1, 0.9, 0);
-
-
-
-
-
-    glEnd();
-
-}
 
 
 
