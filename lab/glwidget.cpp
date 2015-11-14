@@ -84,6 +84,7 @@ void GLWidget::setPoints(float x0, float y0, float x1, float y1, float x2, float
     this->x4 = x4; this->y4 = y4;
 
     paintGL();
+    updateGL();
 }
 
 float J(int n, int i, float t){
