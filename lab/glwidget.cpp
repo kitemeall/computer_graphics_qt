@@ -20,10 +20,8 @@ void GLWidget::initializeGL()
     glLineWidth(5);
     glPointSize(5);
 
-    float x0 = 1; float y0 = 1;
-    float x1 = 2; float y1 = 3;
-    float x2 = 4; float y2 = 3;
-    float x3 = 3; float y3 = 1;
+    glOrtho(0, 10, 0, 10, 1, -1 );
+
 
 
 
@@ -32,14 +30,29 @@ void GLWidget::initializeGL()
 
 void GLWidget::paintGL()
 {
+    float x0 = 1; float y0 = 1;
+    float x1 = 4; float y1 = 2;
+    float x2 = 1; float y2 = 5;
+    float x3 = 4; float y3 = 7;
 
 
     glClearColor(1.0, 1.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    glColor3f(1, 0.0, 0.0);
+
+
+
     glBegin(GL_POINTS);
-        glVertex2d(0.3, 0.3);
+        glColor3f(1, 0.0, 0.0);
+       for (double t = 0; t <= 1.0; t += 0.1)
+           glVertex2f(Xt(x0, x1, x2, x3, t),
+                      Xt(y0, y1, y2, y3, t));
+
+       glColor3f(0, 0, 1);
+       glVertex2f(x0, y0);
+       glVertex2f(x1, y1);
+       glVertex2f(x2, y2);
+       glVertex2f(x3, y3);
     glEnd();
 
 }
