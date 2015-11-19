@@ -14,23 +14,12 @@ public:
     void resizeGL(int width, int height);
 
 public slots:
-    void setType(int t);
 
 
 
 private:
 
-    void drawPoints();
-    void drawLines();
-    void drawLineStrip();
-    void drawLineLoop();
-    void drawPolygons();
-    void drawNonconvex();
-    void drawTriangles();
-    void drawTriangleStrip();
-    void drawTriangleFan();
-    void drawQuads();
-    void drawQuadStrip();
+
 };
 
 #endif // GLWIDGET_H

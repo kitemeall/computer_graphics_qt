@@ -10,6 +10,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = lab1
 TEMPLATE = app
+LIBS += -lglut -lGLU -lGL
 
 
 SOURCES += main.cpp\
